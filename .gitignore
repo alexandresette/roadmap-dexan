@@ -1,0 +1,28 @@
+# Arquivos desnecessários para não subir no GitHub
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Versões antigas/testes
+*-old.html
+*-backup.html
+*-test.html
+roadmap-dexan-futuristic.html
+roadmap-dexan-premium.html
+roadmap-dexan-mentoria.html
+
+# Logs
+*.log
+
+# Arquivos temporários
+*.tmp
+*.temp
+~*
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
