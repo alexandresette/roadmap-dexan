@@ -823,7 +823,7 @@
             // Processar formatação básica
             let formattedContent = content
                 // Negrito **texto**
-                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
                 // Quebras de linha
                 .replace(/
 /g, '<br>');
@@ -848,6 +848,7 @@
     });
 </script>
 <!-- 💬 DEXAN CHAT WIDGET - Fim -->
+
 
 
 
