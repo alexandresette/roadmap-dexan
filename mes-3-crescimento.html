@@ -89,6 +89,9 @@
           localStorage.setItem(taskId, value);
         }
       };
+    
+        // Initialize on page load
+        loadProgressLocal();
     </script>
     <meta name="apple-mobile-web-app-title" content="DEXAN">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -329,6 +332,9 @@
             document.getElementById('trackingTotalText').textContent = total;
         }
         loadProgress();
+    
+        // Initialize on page load
+        loadProgressLocal();
     </script>
 </body>
 </html>
