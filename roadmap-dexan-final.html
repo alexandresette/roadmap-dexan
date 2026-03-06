@@ -252,10 +252,10 @@
             top: 50%;
             left: 0;
             transform: translateY(-50%);
-            animation: packageDrive 24s linear infinite, packageFadeIn 0.3s ease 12s forwards;
-            font-size: 32px; /* Reduzido de 42px para ficar igual ao caminhão */
+            animation: packageDrive 24s linear 12s infinite, packageFadeIn 0.3s ease 12s forwards;
+            font-size: 32px;
             filter: drop-shadow(0 4px 12px rgba(30, 64, 175, 0.8)) drop-shadow(0 0 20px rgba(30, 64, 175, 0.6));
-            opacity: 0; /* Começa invisível */
+            opacity: 0;
         }
 
         @keyframes packageFadeIn {
@@ -269,8 +269,7 @@
 
         @keyframes packageDrive {
             0% { left: 0%; }
-            50% { left: 0%; } /* Fica parado 12s (50% de 24s) */
-            100% { left: 93%; }
+            100% { left: 93%; } /* Mesma velocidade do caminhão! */
         }
 
         @keyframes packageFadeIn {
@@ -1563,6 +1562,40 @@
 
             }, 400);
         });
+
+        // ============================================
+        // PERSISTIR ANIMAÇÃO TIMELINE
+        // ============================================
+        
+        (function() {
+            const truck = document.querySelector('.delivery-truck');
+            const package = document.querySelector('.delivery-package');
+            
+            if (!truck || !package) return;
+            
+            // Tentar restaurar posição da animação
+            const savedTime = sessionStorage.getItem('timeline_animation_time');
+            const savedTimestamp = sessionStorage.getItem('timeline_animation_timestamp');
+            
+            if (savedTime && savedTimestamp) {
+                const elapsed = (Date.now() - parseInt(savedTimestamp)) / 1000;
+                const resumeTime = (parseFloat(savedTime) + elapsed) % 24;
+                
+                truck.style.animationDelay = `-${resumeTime}s`;
+                package.style.animationDelay = `-${resumeTime}s`;
+            }
+            
+            // Salvar posição ao navegar
+            const links = document.querySelectorAll('a, .milestone-card, .month-station');
+            links.forEach(link => {
+                link.addEventListener('click', function() {
+                    const computedTruck = window.getComputedStyle(truck);
+                    const matrix = computedTruck.transform;
+                    
+                    sessionStorage.setItem('timeline_animation_timestamp', Date.now().toString());
+                });
+            });
+        })();
     </script>
 </body>
 </html>
