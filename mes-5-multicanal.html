@@ -158,7 +158,7 @@
         .progress-summary h4 { font-size: 14px; margin-bottom: 12px; color: rgba(255,255,255,0.8); }
         .progress-bar { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;
             width: 0%; margin-bottom: 8px; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--dexan-blue), var(--dexan-orange)); border-radius: 4px; transition: width 0.3s; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--dexan-blue), var(--dexan-orange)); border-radius: 4px; transition: width 0.3s; width: 0%; }
         .progress-text { font-size: 12px; color: rgba(255,255,255,0.6); text-align: center; }
         @media (max-width: 768px) { h1 { font-size: 36px; } .week-header { flex-direction: column; gap: 8px; } .progress-summary { position: static; margin-top: 32px; } .tracking-stats { grid-template-columns: 1fr; } }
     </style>
@@ -176,7 +176,7 @@
             <h2>📊 Visão Geral do Mês</h2>
             <p style="color:rgba(255,255,255,0.7);margin-bottom:16px;">O mês 5 é dedicado à entrada na Amazon e otimização máxima de todos os canais. Ao final, você terá 4 canais ativos, 12-15 produtos e meta de R$ 20.000/mês.</p>
             <div class="overview-grid">
-                <div class="overview-item"><div class="overview-value" id="totalTasks">26</div><div class="overview-label">Tarefas Totais</div></div>
+                <div class="overview-item"><div class="overview-value" id="totalTasks">24</div><div class="overview-label">Tarefas Totais</div></div>
                 <div class="overview-item"><div class="overview-value">R$ 20k</div><div class="overview-label">Meta Faturamento</div></div>
                 <div class="overview-item"><div class="overview-value">R$ 5.000</div><div class="overview-label">Investimento</div></div>
                 <div class="overview-item"><div class="overview-value">4</div><div class="overview-label">Canais de Venda</div></div>
@@ -188,20 +188,20 @@
                 <div class="tracking-percentage" id="trackingPercentage">0%</div>
             </div>
             <div class="tracking-stats">
-                <div class="tracking-stat"><div class="stat-value" id="trackingTotal">26</div><div class="stat-label">Total</div></div>
+                <div class="tracking-stat"><div class="stat-value" id="trackingTotal">24</div><div class="stat-label">Total</div></div>
                 <div class="tracking-stat"><div class="stat-value" id="trackingCompleted">0</div><div class="stat-label">Concluídas</div></div>
                 <div class="tracking-stat"><div class="stat-value">R$ 20k</div><div class="stat-label">Meta</div></div>
             </div>
             <div class="tracking-progress-bar"><div class="tracking-progress-fill" id="trackingProgressFill" style="width:0%"></div></div>
             <div class="tracking-details">
                 <span class="tracking-text">Progresso geral do mês</span>
-                <span class="tracking-completed"><span id="trackingCompletedText">0</span> de <span id="trackingTotalText">26</span></span>
+                <span class="tracking-completed"><span id="trackingCompletedText">0</span> de <span id="trackingTotalText">24</span></span>
             </div>
         </div>
 
         <!-- SEMANA 17 -->
         <div class="week-section">
-            <div class="week-header"><div class="week-title">📅 Semana 17</div><div class="week-dates">10-16 Jul, 2026</div></div>
+            <div class="week-header"><div class="week-title">📅 Semana 17</div><div class="week-dates">10-16 Jul, 2024</div></div>
             <div class="tasks-group">
                 <h3>🛒 Entrada na Amazon</h3>
                 <div class="task-item" data-task="m5-w17-t1"><div class="checkbox"></div><div class="task-content"><div class="task-title">Abrir conta Amazon Seller</div><div class="task-description">Criar conta no Seller Central Amazon Brasil. Escolher plano: Individual (sem mensalidade) ou Profissional (R$ 19/mês). Enviar documentos: CNPJ, dados bancários, identidade.</div><div class="task-meta"><span>⏱️ 1-2 dias</span><span>💰 R$ 0-19/mês</span><span>🔥 Novo canal!</span></div></div></div>
@@ -216,7 +216,7 @@
 
         <!-- SEMANA 18 -->
         <div class="week-section">
-            <div class="week-header"><div class="week-title">📅 Semana 18</div><div class="week-dates">17-23 Jul, 2026</div></div>
+            <div class="week-header"><div class="week-title">📅 Semana 18</div><div class="week-dates">17-23 Jul, 2024</div></div>
             <div class="tasks-group">
                 <h3>⚙️ Otimização Total dos Canais</h3>
                 <div class="task-item" data-task="m5-w18-t1"><div class="checkbox"></div><div class="task-content"><div class="task-title">Otimizar Shopee (ranking)</div><div class="task-description">Usar estratégias de ranking Shopee: participar de promoções da plataforma, usar Shopee Ads (R$ 5-10/dia), responder perguntas rapidamente, acumular avaliações positivas.</div><div class="task-meta"><span>⏱️ 2 dias</span><span>💰 R$ 150-300/mês (Shopee Ads)</span></div></div></div>
@@ -231,7 +231,7 @@
 
         <!-- SEMANA 19 -->
         <div class="week-section">
-            <div class="week-header"><div class="week-title">📅 Semana 19</div><div class="week-dates">24-30 Jul, 2026</div></div>
+            <div class="week-header"><div class="week-title">📅 Semana 19</div><div class="week-dates">24-30 Jul, 2024</div></div>
             <div class="tasks-group">
                 <h3>📞 Call 5 - Multi-Canal e Fornecedores</h3>
                 <div class="task-item" data-task="m5-w19-t1"><div class="checkbox"></div><div class="task-content"><div class="task-title">Preparar material para Call 5</div><div class="task-description">Relatório completo: faturamento por canal, margem por canal, produtos mais rentáveis, status fornecedores, plano para R$ 30k, dúvidas sobre container e importação direta.</div><div class="task-meta"><span>⏱️ 2-3 horas</span><span>💰 R$ 0</span></div></div></div>
@@ -250,7 +250,7 @@
 
         <!-- SEMANA 20 -->
         <div class="week-section">
-            <div class="week-header"><div class="week-title">📅 Semana 20</div><div class="week-dates">31 Jul - 6 Ago, 2026</div></div>
+            <div class="week-header"><div class="week-title">📅 Semana 20</div><div class="week-dates">31 Jul - 6 Ago, 2024</div></div>
             <div class="tasks-group">
                 <h3>🏆 Consolidação R$ 20k e Preparação Container</h3>
                 <div class="task-item" data-task="m5-w20-t1"><div class="checkbox"></div><div class="task-content"><div class="task-title">Consolidar R$ 20.000 multi-canal</div><div class="task-description">Monitorar faturamento diário de todos os canais. Ajustar investimentos em Ads para maximizar resultado. Criar promoções estratégicas se necessário. Meta: R$ 20k no mês.</div><div class="task-meta"><span>⏱️ Semana toda</span><span>🎯 META: R$ 20.000</span><span>🏆 Marco!</span></div></div></div>
@@ -266,7 +266,7 @@
         <div class="progress-summary">
             <h4>Progresso Mês 5</h4>
             <div class="progress-bar"><div class="progress-fill" id="monthProgress"></div></div>
-            <div class="progress-text"><span id="completedTasks">0</span> de <span id="totalTasksFooter">26</span> tarefas</div>
+            <div class="progress-text"><span id="completedTasks">0</span> de <span id="totalTasksFooter">24</span> tarefas</div>
         </div>
     </div>
     <script>
