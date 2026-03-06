@@ -10,6 +10,31 @@
     <meta name="theme-color" content="#F97316">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Firebase -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+      import { getFirestore, doc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyDkSNQDa2-mmX5PNkx6RdDCqaW7gMdQ5sc",
+        authDomain: "dexan-roadmap.firebaseapp.com",
+        projectId: "dexan-roadmap",
+        storageBucket: "dexan-roadmap.firebasestorage.app",
+        messagingSenderId: "1029203204718",
+        appId: "1:1029203204718:web:19f244425560c469c7647f"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const TASKS_DOC = doc(db, "roadmap", "tasks");
+
+      // Listen for real-time updates and update card progress bars
+      onSnapshot(TASKS_DOC, (snap) => {
+        const data = snap.exists() ? snap.data() : {};
+        window._firestoreData = data;
+        if (typeof window.updateAllCards === 'function') window.updateAllCards(data);
+      });
+    </script>
     <meta name="apple-mobile-web-app-title" content="DEXAN">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dexan Commerce - Jornada 2026</title>
@@ -1472,22 +1497,12 @@
             let totalTasks = 0;
 
             setTimeout(() => {
+                // updateAllCards reads from Firestore data
+            window.updateAllCards = function(data) {
+                let totalCompleted = 0;
+                let totalTasks = 0;
                 monthConfig.forEach(month => {
-                    // Count tasks from localStorage
-                    const completed = month.keys.filter(k => localStorage.getItem(k) === 'true').length;
-                    // Fallback: scan all localStorage keys with this month prefix
-                    let realCompleted = completed;
-                    if (completed === 0) {
-                        let count = 0;
-                        for (let i = 0; i < localStorage.length; i++) {
-                            const key = localStorage.key(i);
-                            if (key && key.startsWith(month.prefix + '-') && localStorage.getItem(key) === 'true') {
-                                count++;
-                            }
-                        }
-                        realCompleted = count;
-                    }
-
+                    const realCompleted = month.keys.filter(k => data[k] === true).length;
                     const pct = month.total > 0 ? Math.round((realCompleted / month.total) * 100) : 0;
 
                     const countEl = document.getElementById('m' + month.id + '-count');
@@ -1497,6 +1512,7 @@
                     if (barEl) {
                         barEl.style.width = pct + '%';
                         if (pct >= 100) barEl.classList.add('complete');
+                        else barEl.classList.remove('complete');
                     }
 
                     totalCompleted += realCompleted;
@@ -1509,6 +1525,10 @@
                 const progressPercent = document.getElementById('progressPercent');
                 if (progressBar) progressBar.style.width = globalPct + '%';
                 if (progressPercent) progressPercent.textContent = globalPct + '%';
+            };
+
+            // Initial call with empty data (will be overwritten by Firestore snapshot)
+            window.updateAllCards(window._firestoreData || {});
 
             }, 400);
         });

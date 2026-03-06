@@ -10,6 +10,86 @@
     <meta name="theme-color" content="#F97316">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Firebase -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+      import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyDkSNQDa2-mmX5PNkx6RdDCqaW7gMdQ5sc",
+        authDomain: "dexan-roadmap.firebaseapp.com",
+        projectId: "dexan-roadmap",
+        storageBucket: "dexan-roadmap.firebasestorage.app",
+        messagingSenderId: "1029203204718",
+        appId: "1:1029203204718:web:19f244425560c469c7647f"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const TASKS_DOC = doc(db, "roadmap", "tasks");
+
+      // Expose to global scope
+      window._db = db;
+      window._tasksDoc = TASKS_DOC;
+      window._firestoreReady = false;
+      window._onSnapshot = onSnapshot;
+      window._setDoc = setDoc;
+      window._getDoc = getDoc;
+
+      // Load from Firestore and listen for real-time updates
+      window.addEventListener('DOMContentLoaded', async () => {
+        try {
+          // Initial load
+          const snap = await getDoc(TASKS_DOC);
+          const data = snap.exists() ? snap.data() : {};
+
+          // Apply saved state to all task items
+          document.querySelectorAll('.task-item').forEach(task => {
+            const taskId = task.getAttribute('data-task');
+            if (data[taskId] === true) {
+              task.classList.add('completed');
+              const cb = task.querySelector('.checkbox');
+              if (cb) cb.classList.add('checked');
+            }
+          });
+
+          // Recount and update progress
+          if (typeof window.recalcProgress === 'function') window.recalcProgress();
+
+          // Real-time listener - syncs across all devices
+          onSnapshot(TASKS_DOC, (snap) => {
+            const data = snap.exists() ? snap.data() : {};
+            document.querySelectorAll('.task-item').forEach(task => {
+              const taskId = task.getAttribute('data-task');
+              const shouldBeCompleted = data[taskId] === true;
+              const isCompleted = task.classList.contains('completed');
+              if (shouldBeCompleted !== isCompleted) {
+                task.classList.toggle('completed', shouldBeCompleted);
+                const cb = task.querySelector('.checkbox');
+                if (cb) cb.classList.toggle('checked', shouldBeCompleted);
+              }
+            });
+            if (typeof window.recalcProgress === 'function') window.recalcProgress();
+          });
+
+          window._firestoreReady = true;
+        } catch(e) {
+          console.warn('Firebase error, falling back to localStorage:', e);
+          window._firestoreReady = false;
+          if (typeof window.loadProgressLocal === 'function') window.loadProgressLocal();
+        }
+      });
+
+      // Save a single task toggle to Firestore
+      window.saveTaskFirestore = async (taskId, value) => {
+        try {
+          await setDoc(TASKS_DOC, { [taskId]: value }, { merge: true });
+        } catch(e) {
+          // Fallback to localStorage
+          localStorage.setItem(taskId, value);
+        }
+      };
+    </script>
     <meta name="apple-mobile-web-app-title" content="DEXAN">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mês 2: Validação - Dexan Commerce</title>
@@ -1108,66 +1188,51 @@
             window.location.href = 'login.html';
         }
 
-        // ============================================
-        // GERENCIAMENTO DE TAREFAS
+                // ============================================
+        // GERENCIAMENTO DE TAREFAS (Firebase Sync)
         // ============================================
 
-        // Load saved progress
-        function loadProgress() {
+        function recalcProgress() {
+            const tasks = document.querySelectorAll('.task-item');
+            const completed = document.querySelectorAll('.task-item.completed').length;
+            updateProgress(completed, tasks.length);
+        }
+        window.recalcProgress = recalcProgress;
+
+        function loadProgressLocal() {
             const tasks = document.querySelectorAll('.task-item');
             let completed = 0;
-            
             tasks.forEach(task => {
                 const taskId = task.getAttribute('data-task');
-                const isCompleted = localStorage.getItem(taskId) === 'true';
-                
-                if (isCompleted) {
+                if (localStorage.getItem(taskId) === 'true') {
                     task.classList.add('completed');
-                    task.querySelector('.checkbox').classList.add('checked');
+                    const cb = task.querySelector('.checkbox');
+                    if (cb) cb.classList.add('checked');
                     completed++;
                 }
             });
-
             updateProgress(completed, tasks.length);
         }
+        window.loadProgressLocal = loadProgressLocal;
 
-        // Toggle task completion
+        // Toggle task
         document.querySelectorAll('.task-item').forEach(task => {
-            task.addEventListener('click', function() {
+            task.addEventListener('click', async function() {
                 const taskId = this.getAttribute('data-task');
-                const checkbox = this.querySelector('.checkbox');
                 const isCompleted = this.classList.toggle('completed');
-                
-                checkbox.classList.toggle('checked');
-                localStorage.setItem(taskId, isCompleted);
-                
-                // Update progress
-                const completed = document.querySelectorAll('.task-item.completed').length;
-                const total = document.querySelectorAll('.task-item').length;
-                updateProgress(completed, total);
+                const cb = this.querySelector('.checkbox');
+                if (cb) cb.classList.toggle('checked');
+
+                // Save to Firestore (or localStorage as fallback)
+                if (typeof window.saveTaskFirestore === 'function') {
+                    await window.saveTaskFirestore(taskId, isCompleted);
+                } else {
+                    localStorage.setItem(taskId, isCompleted);
+                }
+
+                recalcProgress();
             });
         });
-
-        function updateProgress(completed, total) {
-            const percentage = Math.round((completed / total) * 100);
-            
-            // Update bottom progress summary
-            document.getElementById('monthProgress').style.width = percentage + '%';
-            document.getElementById('completedTasks').textContent = completed;
-            document.getElementById('totalTasksFooter').textContent = total;
-            document.getElementById('totalTasks').textContent = total;
-            
-            // Update tracking balloon
-            document.getElementById('trackingPercentage').textContent = percentage + '%';
-            document.getElementById('trackingCompleted').textContent = completed;
-            document.getElementById('trackingTotal').textContent = total;
-            document.getElementById('trackingProgressFill').style.width = percentage + '%';
-            document.getElementById('trackingCompletedText').textContent = completed;
-            document.getElementById('trackingTotalText').textContent = total;
-        }
-
-        // Initialize
-        loadProgress();
     </script>
 </body>
 </html>
