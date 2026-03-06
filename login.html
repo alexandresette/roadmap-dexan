@@ -283,7 +283,7 @@
         window.addEventListener('load', () => {
             const isLoggedIn = sessionStorage.getItem('dexan_auth');
             if (isLoggedIn === 'true') {
-                window.location.href = 'roadmap-dexan-final.html';
+                window.location.href = '/dashboard';
             }
         });
 
@@ -305,7 +305,7 @@
                 sessionStorage.setItem('dexan_user', username);
                 
                 // Redirect
-                window.location.href = 'roadmap-dexan-final.html';
+                window.location.href = '/dashboard';
             } else {
                 // Login failed
                 errorMessage.classList.add('show');

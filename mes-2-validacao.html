@@ -590,7 +590,7 @@
     <button class="logout-btn" onclick="logout()">🚪 Sair</button>
 
     <div class="container">
-        <a href="roadmap-dexan-final.html" class="back-button">← Voltar ao Roadmap</a>
+        <a href="dashboard" class="back-button">← Voltar ao Roadmap</a>
 
         <div class="header">
             <div class="month-badge">MÊS 2 • SEMANAS 5-8</div>
@@ -1183,7 +1183,7 @@
         (function checkAuth() {
             const isLoggedIn = sessionStorage.getItem('dexan_auth');
             if (isLoggedIn !== 'true') {
-                window.location.href = 'login.html';
+                window.location.href = 'login';
                 return;
             }
         })();
@@ -1192,7 +1192,7 @@
         function logout() {
             sessionStorage.removeItem('dexan_auth');
             sessionStorage.removeItem('dexan_user');
-            window.location.href = 'login.html';
+            window.location.href = 'login';
         }
 
                 // ============================================

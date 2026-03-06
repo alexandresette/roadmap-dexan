@@ -166,7 +166,7 @@
 <body>
     <button class="logout-btn" onclick="logout()">🚪 Sair</button>
     <div class="container">
-        <a href="roadmap-dexan-final.html" class="back-button">← Voltar ao Roadmap</a>
+        <a href="dashboard" class="back-button">← Voltar ao Roadmap</a>
         <div class="header">
             <div class="month-badge">MÊS 3 • SEMANAS 9-12</div>
             <h1>📈 Crescimento</h1>
@@ -277,8 +277,8 @@
     </div>
 
     <script>
-        (function checkAuth() { if (sessionStorage.getItem('dexan_auth') !== 'true') { window.location.href = 'login.html'; } })();
-        function logout() { sessionStorage.removeItem('dexan_auth'); sessionStorage.removeItem('dexan_user'); window.location.href = 'login.html'; }
+        (function checkAuth() { if (sessionStorage.getItem('dexan_auth') !== 'true') { window.location.href = 'login'; } })();
+        function logout() { sessionStorage.removeItem('dexan_auth'); sessionStorage.removeItem('dexan_user'); window.location.href = 'login'; }
         // ============================================
         // GERENCIAMENTO DE TAREFAS (Firebase Sync)
         // ============================================

@@ -1,0 +1,49 @@
+{
+  "redirects": [
+    {
+      "source": "/roadmap-dexan-final.html",
+      "destination": "/dashboard",
+      "permanent": true
+    },
+    {
+      "source": "/roadmap-dexan-final",
+      "destination": "/dashboard",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/dashboard",
+      "destination": "/dashboard.html"
+    },
+    {
+      "source": "/mes-1-fundacao",
+      "destination": "/mes-1-fundacao.html"
+    },
+    {
+      "source": "/mes-2-validacao",
+      "destination": "/mes-2-validacao.html"
+    },
+    {
+      "source": "/mes-3-crescimento",
+      "destination": "/mes-3-crescimento.html"
+    },
+    {
+      "source": "/mes-4-expansao",
+      "destination": "/mes-4-expansao.html"
+    },
+    {
+      "source": "/mes-5-multicanal",
+      "destination": "/mes-5-multicanal.html"
+    },
+    {
+      "source": "/mes-6-escala-total",
+      "destination": "/mes-6-escala-total.html"
+    },
+    {
+      "source": "/login",
+      "destination": "/login.html"
+    }
+  ],
+  "cleanUrls": true
+}
