@@ -1370,10 +1370,10 @@
         width: 60px;
         height: 60px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #1E5EFF 0%, #0D47A1 100%);
+        background: linear-gradient(135deg, #1E40AF 0%, #1E5EFF 100%);
         border: none;
         cursor: pointer;
-        box-shadow: 0 4px 12px rgba(30, 94, 255, 0.4);
+        box-shadow: 0 4px 12px rgba(30, 64, 175, 0.4);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1383,7 +1383,8 @@
     
     .chat-button:hover {
         transform: scale(1.1);
-        box-shadow: 0 6px 20px rgba(30, 94, 255, 0.6);
+        box-shadow: 0 6px 20px rgba(30, 64, 175, 0.6);
+        background: linear-gradient(135deg, #1E5EFF 0%, #F97316 100%);
     }
     
     .chat-button svg {
@@ -1414,7 +1415,7 @@
     
     /* Chat Header */
     .chat-header {
-        background: linear-gradient(135deg, #1E5EFF 0%, #0D47A1 100%);
+        background: linear-gradient(135deg, #1E40AF 0%, #1E5EFF 100%);
         color: white;
         padding: 20px;
         display: flex;
@@ -1437,7 +1438,7 @@
         align-items: center;
         justify-content: center;
         font-weight: bold;
-        color: #1E5EFF;
+        color: #1E40AF;
     }
     
     .chat-title h3 {
@@ -1503,12 +1504,12 @@
     }
     
     .message.assistant .message-avatar {
-        background: #1E5EFF;
+        background: #1E40AF;
         color: white;
     }
     
     .message.user .message-avatar {
-        background: #FF8C42;
+        background: #F97316;
         color: white;
     }
     
@@ -1527,7 +1528,7 @@
     }
     
     .message.user .message-content {
-        background: #1E5EFF;
+        background: #1E40AF;
         color: white;
         border-bottom-right-radius: 4px;
     }
@@ -1551,7 +1552,7 @@
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background: #1E5EFF;
+        background: #1E40AF;
         margin-right: 4px;
         animation: typing 1.4s infinite;
     }
@@ -1599,14 +1600,14 @@
     }
     
     .chat-input:focus {
-        border-color: #1E5EFF;
+        border-color: #1E40AF;
     }
     
     .chat-send {
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background: #1E5EFF;
+        background: #1E40AF;
         border: none;
         cursor: pointer;
         display: flex;
@@ -1617,7 +1618,7 @@
     }
     
     .chat-send:hover {
-        background: #0D47A1;
+        background: #F97316;
         transform: scale(1.05);
     }
     
@@ -1643,7 +1644,7 @@
     }
     
     .chat-messages::-webkit-scrollbar-thumb {
-        background: #1E5EFF;
+        background: #1E40AF;
         border-radius: 3px;
     }
     
@@ -1730,6 +1731,20 @@
     
     let conversationHistory = [];
     
+    // Função para limpar chat
+    function clearChat() {
+        // Remove todas as mensagens exceto a inicial e o typing indicator
+        const messages = chatMessages.querySelectorAll('.message');
+        messages.forEach((msg, index) => {
+            if (index > 0) { // Mantém apenas a primeira mensagem (boas-vindas)
+                msg.remove();
+            }
+        });
+        
+        // Limpa o histórico
+        conversationHistory = [];
+    }
+    
     // Toggle chat
     chatButton.addEventListener('click', () => {
         chatContainer.classList.add('active');
@@ -1738,6 +1753,8 @@
     
     chatClose.addEventListener('click', () => {
         chatContainer.classList.remove('active');
+        // Limpa o histórico ao fechar
+        clearChat();
     });
     
     // Send message
@@ -1833,6 +1850,7 @@
     });
 </script>
 <!-- 💬 DEXAN CHAT WIDGET - Fim -->
+
 
 </body>
 </html>
