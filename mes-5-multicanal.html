@@ -312,16 +312,38 @@
         });
         function updateProgress(completed, total) {
             const p = Math.round((completed / total) * 100);
-            document.getElementById('monthProgress').style.width = p + '%';
-            document.getElementById('completedTasks').textContent = completed;
-            document.getElementById('totalTasksFooter').textContent = total;
-            document.getElementById('totalTasks').textContent = total;
-            document.getElementById('trackingPercentage').textContent = p + '%';
-            document.getElementById('trackingCompleted').textContent = completed;
-            document.getElementById('trackingTotal').textContent = total;
-            document.getElementById('trackingProgressFill').style.width = p + '%';
-            document.getElementById('trackingCompletedText').textContent = completed;
-            document.getElementById('trackingTotalText').textContent = total;
+            
+            // Widget inferior
+            const monthProgressEl = document.getElementById('monthProgress');
+            if (monthProgressEl) monthProgressEl.style.width = p + '%';
+            
+            const completedTasksEl = document.getElementById('completedTasks');
+            if (completedTasksEl) completedTasksEl.textContent = completed;
+            
+            const totalTasksFooterEl = document.getElementById('totalTasksFooter');
+            if (totalTasksFooterEl) totalTasksFooterEl.textContent = total;
+            
+            const totalTasksEl = document.getElementById('totalTasks');
+            if (totalTasksEl) totalTasksEl.textContent = total;
+            
+            // Balão tracking
+            const trackingPercentageEl = document.getElementById('trackingPercentage');
+            if (trackingPercentageEl) trackingPercentageEl.textContent = p + '%';
+            
+            const trackingCompletedEl = document.getElementById('trackingCompleted');
+            if (trackingCompletedEl) trackingCompletedEl.textContent = completed;
+            
+            const trackingTotalEl = document.getElementById('trackingTotal');
+            if (trackingTotalEl) trackingTotalEl.textContent = total;
+            
+            const trackingProgressFillEl = document.getElementById('trackingProgressFill');
+            if (trackingProgressFillEl) trackingProgressFillEl.style.width = p + '%';
+            
+            const trackingCompletedTextEl = document.getElementById('trackingCompletedText');
+            if (trackingCompletedTextEl) trackingCompletedTextEl.textContent = completed;
+            
+            const trackingTotalTextEl = document.getElementById('trackingTotalText');
+            if (trackingTotalTextEl) trackingTotalTextEl.textContent = total;
         }
         loadProgress();
     
