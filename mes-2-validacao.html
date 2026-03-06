@@ -1234,6 +1234,47 @@
                 recalcProgress();
             });
         });
+    
+
+        // Update progress bars and counters
+        function updateProgress(completed, total) {
+            const percentage = Math.round((completed / total) * 100);
+            
+            // Update bottom progress summary
+            const monthProgressEl = document.getElementById('monthProgress');
+            if (monthProgressEl) monthProgressEl.style.width = percentage + '%';
+            
+            const completedTasksEl = document.getElementById('completedTasks');
+            if (completedTasksEl) completedTasksEl.textContent = completed;
+            
+            const totalTasksFooterEl = document.getElementById('totalTasksFooter');
+            if (totalTasksFooterEl) totalTasksFooterEl.textContent = total;
+            
+            const totalTasksEl = document.getElementById('totalTasks');
+            if (totalTasksEl) totalTasksEl.textContent = total;
+            
+            // Update tracking balloon
+            const trackingPercentageEl = document.getElementById('trackingPercentage');
+            if (trackingPercentageEl) trackingPercentageEl.textContent = percentage + '%';
+            
+            const trackingCompletedEl = document.getElementById('trackingCompleted');
+            if (trackingCompletedEl) trackingCompletedEl.textContent = completed;
+            
+            const trackingTotalEl = document.getElementById('trackingTotal');
+            if (trackingTotalEl) trackingTotalEl.textContent = total;
+            
+            const trackingProgressFillEl = document.getElementById('trackingProgressFill');
+            if (trackingProgressFillEl) trackingProgressFillEl.style.width = percentage + '%';
+            
+            const trackingCompletedTextEl = document.getElementById('trackingCompletedText');
+            if (trackingCompletedTextEl) trackingCompletedTextEl.textContent = completed;
+            
+            const trackingTotalTextEl = document.getElementById('trackingTotalText');
+            if (trackingTotalTextEl) trackingTotalTextEl.textContent = total;
+        }
+
+        // Initialize on page load
+        loadProgressLocal();
     </script>
 </body>
 </html>
