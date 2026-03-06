@@ -823,7 +823,16 @@
         
         const messageContent = document.createElement('div');
         messageContent.className = 'message-content';
-        messageContent.textContent = content;
+        
+        // Processar formatação básica
+        let formattedContent = content
+            // Negrito **texto**
+            .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+            // Quebras de linha
+            .replace(/
+/g, '<br>');
+        
+        messageContent.innerHTML = formattedContent;
         
         messageDiv.appendChild(avatar);
         messageDiv.appendChild(messageContent);
@@ -842,6 +851,7 @@
     });
 </script>
 <!-- 💬 DEXAN CHAT WIDGET - Fim -->
+
 
 
 
