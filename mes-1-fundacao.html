@@ -1794,6 +1794,12 @@
         const chatMessages = document.getElementById('chatMessages');
         const typingIndicator = document.getElementById('typingIndicator');
         
+        // Verificar se elementos existem
+        if (!chatButton || !chatContainer) {
+            console.error('Chat elements not found!');
+            return;
+        }
+        
         let conversationHistory = [];
         
         // Função para limpar chat
@@ -1811,12 +1817,16 @@
         }
         
         // Toggle chat
-        chatButton.addEventListener('click', () => {
+        chatButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             chatContainer.classList.add('active');
-            chatInput.focus();
+            if (chatInput) chatInput.focus();
         });
         
-        chatClose.addEventListener('click', () => {
+        chatClose.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             chatContainer.classList.remove('active');
             // Limpa o histórico ao fechar
             clearChat();
@@ -1925,6 +1935,7 @@
     });
 </script>
 <!-- 💬 DEXAN CHAT WIDGET - Fim -->
+
 
 
 
