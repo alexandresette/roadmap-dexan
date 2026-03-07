@@ -1896,15 +1896,73 @@
     /* Mobile Responsive */
     @media (max-width: 768px) {
         .chat-container {
-            width: calc(100vw - 32px);
-            height: calc(100vh - 150px);
-            right: 16px;
-            bottom: 90px;
+            width: calc(100% - 20px);
+            height: calc(100vh - 120px);
+            right: 10px;
+            left: 10px;
+            bottom: 80px;
+            border-radius: 12px;
+        }
+        
+        .chat-button {
+            right: 20px;
+            bottom: 20px;
+            width: 56px;
+            height: 56px;
+        }
+        
+        .chat-button svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .chat-header {
+            padding: 16px;
+        }
+        
+        .chat-avatar {
+            width: 36px;
+            height: 36px;
+            font-size: 18px;
+        }
+        
+        .chat-title h3 {
+            font-size: 15px;
+        }
+        
+        .chat-title p {
+            font-size: 11px;
+        }
+        
+        .message-content {
+            max-width: 80%;
+            font-size: 13px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .chat-container {
+            width: calc(100% - 16px);
+            height: calc(100vh - 100px);
+            right: 8px;
+            left: 8px;
+            bottom: 76px;
+            border-radius: 10px;
         }
         
         .chat-button {
             right: 16px;
             bottom: 16px;
+            width: 52px;
+            height: 52px;
+        }
+        
+        .chat-messages {
+            padding: 16px;
+        }
+        
+        .chat-input-container {
+            padding: 12px;
         }
     }
 </style>
@@ -2106,6 +2164,7 @@
     });
 </script>
 <!-- 💬 DEXAN CHAT WIDGET - Fim -->
+
 
 
 
