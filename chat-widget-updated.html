@@ -111,6 +111,27 @@
         background: rgba(255, 255, 255, 0.2);
     }
     
+    .chat-clear {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 18px;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background 0.2s;
+        margin-right: 8px;
+    }
+    
+    .chat-clear:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
     /* Chat Messages */
     .chat-messages {
         flex: 1;
@@ -378,6 +399,7 @@
                 <p>Tire suas dúvidas sobre o roadmap</p>
             </div>
         </div>
+        <button class="chat-clear" id="chatClear" aria-label="Limpar histórico" title="Limpar histórico">🗑️</button>
         <button class="chat-close" id="chatClose" aria-label="Fechar chat">&times;</button>
     </div>
     
@@ -422,6 +444,7 @@
         const chatButton = document.getElementById('chatButton');
         const chatContainer = document.getElementById('chatContainer');
         const chatClose = document.getElementById('chatClose');
+        const chatClear = document.getElementById('chatClear');
         const chatInput = document.getElementById('chatInput');
         const chatSend = document.getElementById('chatSend');
         const chatMessages = document.getElementById('chatMessages');
@@ -435,6 +458,34 @@
         
         let conversationHistory = [];
         
+        // Carregar histórico salvo
+        function loadChatHistory() {
+            const savedHistory = localStorage.getItem('dexan_chat_history');
+            if (savedHistory) {
+                try {
+                    conversationHistory = JSON.parse(savedHistory);
+                    // Restaurar mensagens na UI
+                    conversationHistory.forEach(msg => {
+                        if (msg.role === 'user' || msg.role === 'assistant') {
+                            addMessage(msg.role, msg.content, false); // false = não salvar novamente
+                        }
+                    });
+                } catch (e) {
+                    console.error('Erro ao carregar histórico:', e);
+                    conversationHistory = [];
+                }
+            }
+        }
+        
+        // Salvar histórico
+        function saveChatHistory() {
+            try {
+                localStorage.setItem('dexan_chat_history', JSON.stringify(conversationHistory));
+            } catch (e) {
+                console.error('Erro ao salvar histórico:', e);
+            }
+        }
+        
         // Função para limpar chat
         function clearChat() {
             // Remove todas as mensagens exceto a inicial e o typing indicator
@@ -447,6 +498,7 @@
             
             // Limpa o histórico
             conversationHistory = [];
+            localStorage.removeItem('dexan_chat_history');
         }
         
         // Toggle chat
@@ -461,9 +513,19 @@
             e.preventDefault();
             e.stopPropagation();
             chatContainer.classList.remove('active');
-            // Limpa o histórico ao fechar
-            clearChat();
+            // NÃO limpa mais o histórico ao fechar - mantém a conversa!
         });
+        
+        chatClear.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (confirm('Limpar todo o histórico do chat?')) {
+                clearChat();
+            }
+        });
+        
+        // Carregar histórico salvo ao inicializar
+        loadChatHistory();
         
         // Send message
         async function sendMessage() {
@@ -479,6 +541,7 @@
                 role: 'user',
                 content: message
             });
+            saveChatHistory(); // Salvar após adicionar mensagem do usuário
             
             // Show typing indicator
             typingIndicator.classList.add('active');
@@ -514,6 +577,7 @@
                     role: 'assistant',
                     content: assistantMessage
                 });
+                saveChatHistory(); // Salvar após resposta do assistente
                 
             } catch (error) {
                 console.error('Error:', error);
@@ -529,7 +593,7 @@
             }
         }
         
-        function addMessage(role, content) {
+        function addMessage(role, content, saveToHistory = true) {
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${role}`;
             
