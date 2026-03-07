@@ -2151,8 +2151,7 @@
                 // Negrito **texto**
                 .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
                 // Quebras de linha
-                .replace(/
-/g, '<br>');
+                .replace(/\n/g, '<br>');
             
             messageContent.innerHTML = formattedContent;
             
