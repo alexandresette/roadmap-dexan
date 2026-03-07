@@ -2151,7 +2151,8 @@
                 // Negrito **texto**
                 .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
                 // Quebras de linha
-                .replace(/\n/g, '<br>');
+                .replace(/
+/g, '<br>');
             
             messageContent.innerHTML = formattedContent;
             
@@ -2173,6 +2174,7 @@
     });
 </script>
 <!-- 💬 DEXAN CHAT WIDGET - Fim -->
+
 
 
 
