@@ -288,8 +288,11 @@
         (function loadProgressInstant() {
             let completed = 0;
             const totalTasks = 24;
-            for (let i = 1; i <= totalTasks; i++) {
-                if (localStorage.getItem(`mes5-task-${i}`) === 'true') completed++;
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.startsWith('m5-') && localStorage.getItem(key) === 'true') {
+                    completed++;
+                }
             }
             const percentage = Math.round((completed / totalTasks) * 100);
             const completedEl = document.getElementById('completedTasks');

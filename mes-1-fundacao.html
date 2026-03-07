@@ -1282,10 +1282,10 @@
             let completed = 0;
             const totalTasks = 32; // Total de tarefas do Mês 1
             
-            // Percorrer todas as tarefas possíveis
-            for (let i = 1; i <= totalTasks; i++) {
-                const taskId = `mes1-task-${i}`;
-                if (localStorage.getItem(taskId) === 'true') {
+            // Percorrer o localStorage procurando tarefas do mês 1
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.startsWith('m1-') && localStorage.getItem(key) === 'true') {
                     completed++;
                 }
             }
