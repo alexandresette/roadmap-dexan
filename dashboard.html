@@ -823,7 +823,7 @@
                 <div class="delivery-package">📦</div>
 
                 <!-- Month Stations -->
-                <div class="month-station month-1" onclick="window.location.href='mes-1-fundacao'">
+                <div class="month-station month-1" onclick="window.location.href='mes-1-fundacao.html'">
                     <div class="station-marker">
                         <div class="station-icon">🏗️</div>
                         <div class="station-label">MÊS 1</div>
@@ -831,7 +831,7 @@
                     </div>
                 </div>
 
-                <div class="month-station month-2" onclick="window.location.href='mes-2-validacao'">
+                <div class="month-station month-2" onclick="window.location.href='mes-2-validacao.html'">
                     <div class="station-marker">
                         <div class="station-icon">🎯</div>
                         <div class="station-label">MÊS 2</div>
@@ -839,7 +839,7 @@
                     </div>
                 </div>
 
-                <div class="month-station month-3" onclick="window.location.href='mes-3-crescimento'">
+                <div class="month-station month-3" onclick="window.location.href='mes-3-crescimento.html'">
                     <div class="station-marker">
                         <div class="station-icon">📈</div>
                         <div class="station-label">MÊS 3</div>
@@ -847,7 +847,7 @@
                     </div>
                 </div>
 
-                <div class="month-station month-4" onclick="window.location.href='mes-4-expansao'">
+                <div class="month-station month-4" onclick="window.location.href='mes-4-expansao.html'">
                     <div class="station-marker">
                         <div class="station-icon">🏢</div>
                         <div class="station-label">MÊS 4</div>
@@ -855,7 +855,7 @@
                     </div>
                 </div>
 
-                <div class="month-station month-5" onclick="window.location.href='mes-5-multicanal'">
+                <div class="month-station month-5" onclick="window.location.href='mes-5-multicanal.html'">
                     <div class="station-marker">
                         <div class="station-icon">📊</div>
                         <div class="station-label">MÊS 5</div>
@@ -863,7 +863,7 @@
                     </div>
                 </div>
 
-                <div class="month-station month-6" onclick="window.location.href='mes-6-escala-total'">
+                <div class="month-station month-6" onclick="window.location.href='mes-6-escala-total.html'">
                     <div class="station-marker">
                         <div class="station-icon">🚀</div>
                         <div class="station-label">MÊS 6</div>
@@ -876,7 +876,7 @@
         <!-- Milestones Grid -->
         <div class="milestones-grid">
             <!-- Month 1 -->
-            <div class="milestone-card" onclick="window.location.href='mes-1-fundacao'">
+            <div class="milestone-card" onclick="window.location.href='mes-1-fundacao.html'">
                 <div class="milestone-header">
                     <div class="milestone-icon">🏗️</div>
                     <div class="milestone-month">MÊS 1</div>
@@ -911,7 +911,7 @@
             </div>
 
             <!-- Month 2 -->
-            <div class="milestone-card" onclick="window.location.href='mes-2-validacao'">
+            <div class="milestone-card" onclick="window.location.href='mes-2-validacao.html'">
                 <div class="milestone-header">
                     <div class="milestone-icon">🎯</div>
                     <div class="milestone-month">MÊS 2</div>
@@ -946,7 +946,7 @@
             </div>
 
             <!-- Month 3 -->
-            <div class="milestone-card" onclick="window.location.href='mes-3-crescimento'">
+            <div class="milestone-card" onclick="window.location.href='mes-3-crescimento.html'">
                 <div class="milestone-header">
                     <div class="milestone-icon">📈</div>
                     <div class="milestone-month">MÊS 3</div>
@@ -981,7 +981,7 @@
             </div>
 
             <!-- Month 4 -->
-            <div class="milestone-card" onclick="window.location.href='mes-4-expansao'">
+            <div class="milestone-card" onclick="window.location.href='mes-4-expansao.html'">
                 <div class="milestone-header">
                     <div class="milestone-icon">🏢</div>
                     <div class="milestone-month">MÊS 4</div>
@@ -1016,7 +1016,7 @@
             </div>
 
             <!-- Month 5 -->
-            <div class="milestone-card" onclick="window.location.href='mes-5-multicanal'">
+            <div class="milestone-card" onclick="window.location.href='mes-5-multicanal.html'">
                 <div class="milestone-header">
                     <div class="milestone-icon">🌐</div>
                     <div class="milestone-month">MÊS 5</div>
@@ -1050,7 +1050,7 @@
                 </div>
             </div>
 
-            <div class="milestone-card" onclick="window.location.href='mes-6-escala-total'">
+            <div class="milestone-card" onclick="window.location.href='mes-6-escala-total.html'">
                 <div class="milestone-header">
                     <div class="milestone-icon">🚀</div>
                     <div class="milestone-month">MÊS 6</div>
@@ -1431,7 +1431,7 @@
         (function checkAuth() {
             const isLoggedIn = sessionStorage.getItem('dexan_auth');
             if (isLoggedIn !== 'true') {
-                window.location.href = 'login';
+                window.location.href = 'login.html';
                 return;
             }
         })();
@@ -1440,7 +1440,7 @@
         function logout() {
             sessionStorage.removeItem('dexan_auth');
             sessionStorage.removeItem('dexan_user');
-            window.location.href = 'login';
+            window.location.href = 'login.html';
         }
 
         // ============================================
@@ -2083,7 +2083,8 @@
                 // Negrito **texto**
                 .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
                 // Quebras de linha
-                .replace(/\n/g, '<br>');
+                .replace(/
+/g, '<br>');
             
             messageContent.innerHTML = formattedContent;
             
@@ -2105,6 +2106,7 @@
     });
 </script>
 <!-- 💬 DEXAN CHAT WIDGET - Fim -->
+
 
 
 
