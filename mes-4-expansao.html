@@ -284,6 +284,20 @@
     </div>
     <script>
         (function checkAuth() { if (sessionStorage.getItem('dexan_auth') !== 'true') { window.location.href = 'login'; } })();
+        // CARREGAMENTO INSTANTÂNEO DO PROGRESSO
+        (function loadProgressInstant() {
+            let completed = 0;
+            const totalTasks = 24;
+            for (let i = 1; i <= totalTasks; i++) {
+                if (localStorage.getItem(`mes4-task-${i}`) === 'true') completed++;
+            }
+            const percentage = Math.round((completed / totalTasks) * 100);
+            const completedEl = document.getElementById('completedTasks');
+            if (completedEl) completedEl.textContent = completed;
+            const progressBar = document.getElementById('monthProgress');
+            if (progressBar) progressBar.style.width = percentage + '%';
+        })();
+        
         function logout() { sessionStorage.removeItem('dexan_auth'); sessionStorage.removeItem('dexan_user'); window.location.href = 'login'; }
                 // ============================================
         // GERENCIAMENTO DE TAREFAS (Firebase Sync)

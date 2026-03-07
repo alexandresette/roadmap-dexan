@@ -1274,6 +1274,32 @@
             }
         })();
 
+        // ============================================
+        // CARREGAMENTO INSTANTÂNEO DO PROGRESSO
+        // ============================================
+        (function loadProgressInstant() {
+            // Contar tarefas completadas no localStorage
+            let completed = 0;
+            const totalTasks = 32; // Total de tarefas do Mês 1
+            
+            // Percorrer todas as tarefas possíveis
+            for (let i = 1; i <= totalTasks; i++) {
+                const taskId = `mes1-task-${i}`;
+                if (localStorage.getItem(taskId) === 'true') {
+                    completed++;
+                }
+            }
+            
+            // Atualizar elementos IMEDIATAMENTE
+            const percentage = Math.round((completed / totalTasks) * 100);
+            
+            const completedEl = document.getElementById('completedTasks');
+            if (completedEl) completedEl.textContent = completed;
+            
+            const progressBar = document.getElementById('monthProgress');
+            if (progressBar) progressBar.style.width = percentage + '%';
+        })();
+
         // Logout function
         function logout() {
             sessionStorage.removeItem('dexan_auth');
