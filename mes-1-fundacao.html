@@ -1293,11 +1293,22 @@
             // Atualizar elementos IMEDIATAMENTE
             const percentage = Math.round((completed / totalTasks) * 100);
             
+            // Balão de progresso inferior
             const completedEl = document.getElementById('completedTasks');
             if (completedEl) completedEl.textContent = completed;
             
             const progressBar = document.getElementById('monthProgress');
             if (progressBar) progressBar.style.width = percentage + '%';
+            
+            // Balão de acompanhamento superior
+            const trackingPercentageEl = document.getElementById('trackingPercentage');
+            if (trackingPercentageEl) trackingPercentageEl.textContent = percentage + '%';
+            
+            const trackingCompletedEl = document.getElementById('trackingCompleted');
+            if (trackingCompletedEl) trackingCompletedEl.textContent = completed;
+            
+            const trackingProgressFillEl = document.getElementById('trackingProgressFill');
+            if (trackingProgressFillEl) trackingProgressFillEl.style.width = percentage + '%';
         })();
 
         // Logout function
